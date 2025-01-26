@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { BarChart3, Home, PiggyBank, Settings } from "lucide-react"
+import { BarChart3, Home, Settings } from "lucide-react"
 
 const navigation = [
   {
@@ -12,14 +12,9 @@ const navigation = [
     icon: Home
   },
   {
-    name: "Expenses",
-    href: "/expenses",
+    name: "Transactions",
+    href: "/transactions",
     icon: BarChart3
-  },
-  {
-    name: "Savings",
-    href: "/savings",
-    icon: PiggyBank
   },
   {
     name: "Settings",
