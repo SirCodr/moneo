@@ -1,101 +1,83 @@
-import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DollarSign, TrendingUp, Wallet, Target, ArrowUpRight, ArrowDownRight, CreditCard, PiggyBank } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex-1 space-y-8">
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+          <p className="text-muted-foreground">
+            Welcome back! Here's your financial overview.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="relative overflow-hidden">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 transform bg-chart-1/10 rounded-full" />
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Monthly Expenses</CardTitle>
+            <DollarSign className="h-4 w-4 text-chart-1" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-chart-1">$1,234</div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <ArrowUpRight className="mr-1 h-3 w-3 text-red-500" />
+              <span className="text-red-500 font-medium">+20.1%</span>
+              <span className="ml-1">vs last month</span>
+            </div>
+            <Progress value={65} className="h-1 mt-3" />
+          </CardContent>
+        </Card>
+        <Card className="relative overflow-hidden">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 transform bg-chart-2/10 rounded-full" />
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Budget Status</CardTitle>
+            <Wallet className="h-4 w-4 text-chart-2" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-chart-2">$2,000</div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <span className="font-medium">38.2% remaining</span>
+              <span className="ml-1">of monthly budget</span>
+            </div>
+            <Progress value={61.8} className="h-1 mt-3" />
+          </CardContent>
+        </Card>
+        <Card className="relative overflow-hidden">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 transform bg-chart-3/10 rounded-full" />
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
+            <PiggyBank className="h-4 w-4 text-chart-3" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-chart-3">$5,670</div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <ArrowUpRight className="mr-1 h-3 w-3 text-green-500" />
+              <span className="text-green-500 font-medium">+12.3%</span>
+              <span className="ml-1">this year</span>
+            </div>
+            <Progress value={78} className="h-1 mt-3" />
+          </CardContent>
+        </Card>
+        <Card className="relative overflow-hidden">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 transform bg-chart-4/10 rounded-full" />
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Recent Transactions</CardTitle>
+            <CreditCard className="h-4 w-4 text-chart-4" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-chart-4">24</div>
+            <div className="flex items-center text-xs text-muted-foreground mt-1">
+              <ArrowDownRight className="mr-1 h-3 w-3 text-green-500" />
+              <span className="text-green-500 font-medium">-8.4%</span>
+              <span className="ml-1">vs last week</span>
+            </div>
+            <Progress value={45} className="h-1 mt-3" />
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  );
+  )
 }
