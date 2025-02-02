@@ -1,5 +1,4 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import '../globals.css';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from "@/components/theme-provider";
 import { MainNav } from "@/components/main-nav";
@@ -8,16 +7,12 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Expense Tracker',
-  description: 'Modern expense tracking platform',
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
