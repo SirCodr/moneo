@@ -1,8 +1,10 @@
-import { Provider } from "@supabase/supabase-js";
-import supabase from "./supabase";
+import { SignInWithOAuthCredentials } from "@supabase/supabase-js";
+import { createClient } from "./supabase";
 
-export function loginWithProvider(provider: Provider) {
-    return supabase.auth.signInWithOAuth({
+export async function loginWithProvider({ provider, options }: SignInWithOAuthCredentials) {
+  const supabase = createClient();
+    return await supabase.auth.signInWithOAuth({
       provider,
+      options
     });
   }

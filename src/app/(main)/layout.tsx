@@ -4,14 +4,21 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { MainNav } from "@/components/main-nav";
 import { UserNav } from "@/components/user-nav";
 import { ModeToggle } from "@/components/mode-toggle";
+import { createClient } from '@/lib/supabase';
+import { redirect } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) redirect('/login')
 
   return (
     <html lang="en" suppressHydrationWarning>
