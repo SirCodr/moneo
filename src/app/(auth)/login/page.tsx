@@ -1,32 +1,17 @@
 import type { Metadata } from "next"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { loginWithProvider } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { login } from "./actions";
 
 export const metadata: Metadata = {
   title: "Login | Expense Tracker",
   description: "Login to your account",
 }
 
-async function handleSubmit() {
-  'use server'
-  const origin = (await headers()).get("origin")
-  const { error, data } = await loginWithProvider({ provider: "google", options: { redirectTo: `${origin}/auth/callback` } })
-
-  if (error) {
-    console.error(error)
-    return
-  } else {
-    redirect(data.url)
-  }
-}
-
 export default async function LoginPage() {
   return (
-      <form className="flex items-center justify-center min-h-screen bg-gray-100" action={handleSubmit}>
+      <form className="flex items-center justify-center min-h-screen bg-gray-100" action={login}>
       <Card className="w-[350px]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Login</CardTitle>
