@@ -7,15 +7,16 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { TransactionForm } from "@/components/transaction-form"
 import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 type Props = {
   data: unknown[]
 }
 
 export default function TransactionsTable({ data }: Props) {
+  const router = useRouter()
+  const pathname = usePathname()
   const [date, setDate] = useState<Date>()
   const [transactionType, setTransactionType] = useState<string>("all")
   const [isFiltersVisible, setIsFiltersVisible] = useState(false)
@@ -32,6 +33,11 @@ export default function TransactionsTable({ data }: Props) {
     }
     return true
   })
+
+  function openModal() {
+    router.push(`${pathname}/create`)
+  }
+
   return (
     <div className="space-y-5">
       <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2'>
@@ -45,20 +51,10 @@ export default function TransactionsTable({ data }: Props) {
               Filters
               {isFiltersVisible ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
             </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="w-full sm:w-auto">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Transaction
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Add New Transaction</DialogTitle>
-                </DialogHeader>
-                <TransactionForm />
-              </DialogContent>
-            </Dialog>
+            <Button className="w-full sm:w-auto" onClick={openModal}>
+              <Plus className="mr-2 h-4 w-4" />
+              Add Transaction
+            </Button>
           </div>
 
         {isFiltersVisible && (

@@ -7,7 +7,9 @@ export default async function TransactionsPage() {
   const { data } = await getAllTransactionByUser(user!.id)
 
   return (
-    <TransactionsTable data={data} />
+    <>
+      <TransactionsTable data={data} />
+    </>
   )
 }
 
