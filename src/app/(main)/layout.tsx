@@ -7,6 +7,13 @@ import { UserNav } from '@/components/user-nav';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const metadata = {
+  title: {
+    default: 'Moneo',
+    template: "%s | Moneo",
+  }
+}
+
 export default async function TransactionLayout({
   children,
   modal
@@ -17,6 +24,9 @@ export default async function TransactionLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Moneo" />
+      </head>
           <body className={inter.className}>
             <ThemeProvider
               attribute="class"

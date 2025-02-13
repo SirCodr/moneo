@@ -2,6 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign, TrendingUp, Wallet, Target, ArrowUpRight, ArrowDownRight, CreditCard, PiggyBank } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 
+export const metadata = {
+  title: 'Dashboard'
+}
+
 export default function Home() {
   return (
     <div className="flex-1 space-y-8">
