@@ -9,7 +9,7 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      categories: {
+      transaction_categories: {
         Row: {
           created_at: string
           id: string
@@ -52,7 +52,7 @@ export type Database = {
           created_at: string
           date: string
           description: string | null
-          id: number
+          id: string
           type_id: string
           user_id: string
         }
@@ -62,7 +62,7 @@ export type Database = {
           created_at?: string
           date: string
           description?: string | null
-          id?: number
+          id?: string
           type_id?: string
           user_id?: string
         }
@@ -72,7 +72,7 @@ export type Database = {
           created_at?: string
           date?: string
           description?: string | null
-          id?: number
+          id?: string
           type_id?: string
           user_id?: string
         }
@@ -81,7 +81,7 @@ export type Database = {
             foreignKeyName: "transactions_category_id_fkey"
             columns: ["category_id"]
             isOneToOne: false
-            referencedRelation: "categories"
+            referencedRelation: "transaction_categories"
             referencedColumns: ["id"]
           },
           {

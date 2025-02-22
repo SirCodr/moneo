@@ -1,26 +1,14 @@
-"use client";
+import { handleTransactionCreation } from "@/app/(main)/transactions/create/actions";
+import { TransactionFormModal } from "@/components/transactions/transactions-form";
+import { getAllTransactionCategories } from "@/services/transaction_categories";
+import { getAllTransactionTypes } from "@/services/transaction_types";
 
-import { TransactionForm } from "@/components/transaction-form";
-import { Dialog, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
-import { useRouter } from "next/navigation";
-
-export default function TransactionFormModal() {
-  const router = useRouter()
-
-  const closeModal = () => {
-      router.back()
-  };
+export default async function TransactionFormModalPage() {
+  const types = await getAllTransactionTypes()
+  const categories = await getAllTransactionCategories()
 
   return (
-    <Dialog open onOpenChange={closeModal}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>
-            Transaction create form
-          </DialogTitle>
-        </DialogHeader>
-        <TransactionForm />
-      </DialogContent>
-    </Dialog>
-  );
+    <TransactionFormModal
+     types={types.data} categories={categories.data} onSubmit={handleTransactionCreation}/>
+  )
 }

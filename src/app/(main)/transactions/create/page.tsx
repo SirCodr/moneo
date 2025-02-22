@@ -1,7 +1,14 @@
-import { TransactionForm } from "@/components/transaction-form";
+import TransactionsForm from "@/components/transactions/transactions-form";
+import { getAllTransactionCategories } from "@/services/transaction_categories";
+import { getAllTransactionTypes } from "@/services/transaction_types";
+import { handleTransactionCreation } from "./actions";
 
-export default function Page() {
+
+export default async function Page() {
+  const types = await getAllTransactionTypes()
+  const categories = await getAllTransactionCategories()
+
   return (
-    <TransactionForm />
+    <TransactionsForm types={types.data} categories={categories.data} onSubmit={handleTransactionCreation} />
   )
 }
