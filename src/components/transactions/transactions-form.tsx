@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { format, set } from "date-fns"
+import { format } from "date-fns"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,11 +13,12 @@ import { Label } from "@/components/ui/label"
 import { Tables, TablesInsert } from "@/lib/supabase/types"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
 import { useRouter } from "next/navigation"
+import { httpResponse } from "@/lib/http/types"
 
 type Props = {
   categories: Tables<'transaction_categories'>[]
   types: Tables<'transaction_types'>[]
-  onSubmit: (data: TablesInsert<'transactions'>) => Promise<unknown>
+  onSubmit: (data: TablesInsert<'transactions'>) => Promise<httpResponse<Tables<'transactions'>[]>>
   onSuccess?: () => void
 }
 
@@ -66,7 +67,7 @@ export default function TransactionForm(props: Props) {
       e.preventDefault()
       const res  = await onSubmit(data)
       
-      if (res.success) {
+      if (res) {
         clearForm()
         onSuccess()
       }

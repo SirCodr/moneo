@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { getCurrentSession } from './auth';
+import { getCurrentSession } from '../auth';
+import { httpResponse } from './types';
 export class HttpAdapter {
   private http
 
@@ -33,12 +34,12 @@ export class HttpAdapter {
     );
   }
 
-  async get(url: string) {
+  async get<T>(url: string): Promise<httpResponse<T>> {
     const response = await this.http.get(url)
     return response.data
   }
 
-  async post(url: string, data: unknown) {
+  async post<T>(url: string, data: unknown): Promise<httpResponse<T>> {
     const response = await this.http.post(url, data)
     return response.data
   }
