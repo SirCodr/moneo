@@ -9,9 +9,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
+import { Transaction } from "@/app/(main)/transactions/types"
 
 type Props = {
-  data: unknown[]
+  data: Transaction[]
 }
 
 export default function TransactionsTable({ data }: Props) {
@@ -21,16 +22,19 @@ export default function TransactionsTable({ data }: Props) {
   const [transactionType, setTransactionType] = useState<string>("all")
   const [isFiltersVisible, setIsFiltersVisible] = useState(false)
 
+  const isExpense = (type: string) => type === "Expense"
+
   const filteredData = data.filter((transaction) => {
     if (date && new Date(transaction.date).toDateString() !== date.toDateString()) {
       return false
     }
-    if (transactionType === "expense" && transaction.amount > 0) {
+    if (transactionType === "expense" && !isExpense(transaction.transaction_types.name)) {
       return false
     }
-    if (transactionType === "income" && transaction.amount < 0) {
+    if (transactionType === "income" && isExpense(transaction.transaction_types.name)) {
       return false
     }
+
     return true
   })
 
@@ -113,18 +117,17 @@ export default function TransactionsTable({ data }: Props) {
               <tr key={transaction.id} className='border-b'>
                 <td className='px-4 py-2'>{transaction.date}</td>
                 <td className='px-4 py-2'>
-                  <span className='mr-2'>{transaction.icon}</span>
                   {transaction.description}
                 </td>
-                <td className='px-4 py-2'>{transaction.category}</td>
+                <td className='px-4 py-2'>{transaction.transaction_types.name}</td>
                 <td
                   className={cn(
                     'px-4 py-2 text-right font-medium',
-                    transaction.amount < 0 ? 'text-red-500' : 'text-green-500'
+                    transaction.transaction_types.name === 'Expense' ? 'text-red-500' : 'text-green-500'
                   )}
                 >
-                  {transaction.amount < 0 ? '-' : '+'}$
-                  {Math.abs(transaction.amount).toFixed(2)}
+                  {transaction.transaction_types.name === 'Expense' ? '-' : '+'}$
+                  {Math.abs(Number  (transaction.amount)).toFixed(2)}
                 </td>
               </tr>
             ))}
