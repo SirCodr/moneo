@@ -131,7 +131,7 @@ export default function TransactionForm(props: Props) {
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
-            <Calendar mode="single" selected={data.date} onSelect={(e) => handleChange('date', e?.toISOString())} initialFocus />
+            <Calendar mode="single" selected={new Date(data.date)} onSelect={(e) => handleChange('date', e!.toISOString())} initialFocus />
           </PopoverContent>
         </Popover>
       </div>

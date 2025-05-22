@@ -7,7 +7,7 @@ import Link from "next/link";
 
 async function handleSubmit(event: React.FormEvent) {
   event.preventDefault();
-  loginWithProvider("google");
+  loginWithProvider({ provider: "google" });
 }
 
 export default function LoginForm() {

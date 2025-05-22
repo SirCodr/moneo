@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { DollarSign, TrendingUp, Wallet, Target, ArrowUpRight, ArrowDownRight, CreditCard, PiggyBank } from "lucide-react"
+import { DollarSign, Wallet, ArrowUpRight, ArrowDownRight, CreditCard, PiggyBank } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default function Home() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <p className="text-muted-foreground">
-            Welcome back! Here's your financial overview.
+            Welcome back! Here&apos;s your financial overview.
           </p>
         </div>
       </div>
